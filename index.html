@@ -243,20 +243,20 @@
                     </div>
                     <div class="column right">
                         <div class="text"></div>
-                        <form action="#">
+                        <form class="contact_form" action="#">
                             <div class="fields">
                                 <div class="field name">
-                                    <input type="text" placeholder="name" required>
+                                    <input type="text" class="name" placeholder="name" required>
                                 </div>
                                 <div class="field email">
-                                    <input type="email" placeholder="Email" required>
+                                    <input type="email" class="email" placeholder="Email" required>
                                 </div>
                             </div>
                             <div class="field">
-                                <input type="text" placeholder="Subject" required>
+                                <input type="text" class="msg" placeholder="Subject" required>
                             </div>
                             <div class="field textarea">
-                                <textarea cols="30" rows="10" placeholder="Describe project.." required></textarea>
+                                <textarea cols="30" rows="10" class="text" placeholder="Describe project.." required></textarea>
                             </div>
                             <div class="button">
                                 <button type="submit">Send message</button>
@@ -267,5 +267,33 @@
             </div>
         </section>
         <script src="script.js"></script>
+
+        <!-- tst contact -->
+        <script src="https://smtpjs.com/v3/smtp.js"></script>
+        <script>
+
+            const form = document.querySelector('.contact_form');
+
+            function sendMsg(e){
+                e.preventDefault();
+                
+                const name = document.querySelector('.name'),
+                    email = document.querySelector('.email'),
+                    msg = document.querySelector('.msg'),
+                    text = document.querySelector('.text');
+
+            Email.send({
+                SecureToken : "*",
+                To : '*',
+                From : email.value,
+                Subject : "Contact form",
+                Body : msg.value
+            }).then(
+            message => alert(message)
+            );
+            }
+
+            form.addEventListener('submit', sendMsg);
+        </script>
     </body>
 </html>
